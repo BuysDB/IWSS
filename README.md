@@ -1,17 +1,19 @@
-# Precise Control
+# Sparse Binary Distance
 
-This script polls two gamepad controllers (XBOX 360) and converts movements on the axis to keypresses.
-The aim of the script is to obtain higher precision by simulating slow key presses when an axis is pushed little and fast key presses when an axis is fully engaged.
-
-I wrote this tool to be able to play the free tetris clone [Cultris II](http://gewaltig.net/cultris2.aspx) with two people.
+Sparse Binary Distance is able to calculate distances between samples which are encoded by binary features with missing data.
+Sparse Binary Distance has been written by Juan Manuel Pedraza Leal and Buys de Barbanson
 
 ### Prerequisites
 
-The prerequisites are Python 3.6 or higher and [pygame](https://www.pygame.org/)
-The code has only be tested on Windows 7
-
+The prerequisites are Python 3.6 or higher, pandas and numpy
 
 ### Installation
 ```
-pip3 install https://github.com/BuysDB/pysamiterators/archive/master.zip
+pip3 install https://github.com/BuysDB/SparseBinaryDistance/archive/master.zip
+```
+
+### Usage
+
+```
+
 ```
