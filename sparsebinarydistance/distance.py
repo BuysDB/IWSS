@@ -27,7 +27,7 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
     simMatrix : numpy matrix
         Similarity matrix
 
-    differenceMatrix: numpy matrix
+    distanceMatrix: numpy matrix
         Difference matrix
 
     normalisationFactor : numpy vector
@@ -72,11 +72,11 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
     # Similarity: how much do cells look alike?
     simMatrix =  np.zeros( (rawMatrix.shape[0], rawMatrix.shape[0]) )
     # What is the difference between the cells?
-    differenceMatrix =  np.zeros( (rawMatrix.shape[0], rawMatrix.shape[0]) )
+    distanceMatrix =  np.zeros( (rawMatrix.shape[0], rawMatrix.shape[0]) )
 
-    jointMatrix = np.zeros( (rawMatrix.shape[0], rawMatrix.shape[0]) )
+    #jointMatrix = np.zeros( (rawMatrix.shape[0], rawMatrix.shape[0]) )
 
-    mv = int((len(jointMatrix)*(len(jointMatrix)-1))/2)
+    mv = int((len(simMatrix)*(len(simMatrix)-1))/2)
 
     for cai in range(rawMatrix.shape[0]):
         a = rawMatrix[cai,:]
@@ -95,7 +95,7 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
 
             pairwiseNormalizedDistance = np.sum(pairwiseUnnormalizedDistance) / (
                     normalisationFactor )
-            differenceMatrix[cai, cbi] = pairwiseNormalizedDistance
+            distanceMatrix[cai, cbi] = pairwiseNormalizedDistance
 
             # Similarity calculation:
             sim = np.sum( (pOnes+pOnes) * np.logical_and( a==1, b==1 )) + \
@@ -104,27 +104,30 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
             normalisedSim = sim/normalisationFactor
             simMatrix[cai, cbi] = normalisedSim
 
-            joinedDistance =  pairwiseNormalizedDistance + (1-normalisedSim )
-            jointMatrix[cai,cbi]= joinedDistance
-
+            #joinedDistance =  (pairwiseNormalizedDistance*0.5+ (1.0-normalisedSim )*0.5)
+            #jointMatrix[cai,cbi]= joinedDistance
 
             if cai==cbi:
                 break
 
-    for i in range(jointMatrix.shape[0]):
-        for j in range(jointMatrix.shape[0]):
-            jointMatrix[j,i]=jointMatrix[i,j]
+    for i in range(simMatrix.shape[0]):
+        for j in range(simMatrix.shape[0]):
+            simMatrix[j,i]=simMatrix[i,j]
+            distanceMatrix[j,i]=distanceMatrix[i,j]
             if i==j:
                 break
-    jointMatrix = pd.DataFrame(jointMatrix)
-    jointMatrix.index = keptX.index
-    jointMatrix.columns = keptX.index
 
-    simMatrix = pd.DataFrame(simMatrix)
+    simMatrix = pd.DataFrame(np.clip(simMatrix,0,1))
     simMatrix.index = keptX.index
     simMatrix.columns = keptX.index
 
-    differenceMatrix = pd.DataFrame(differenceMatrix)
-    differenceMatrix.index = keptX.index
-    differenceMatrix.columns = keptX.index
-    return keptX, jointMatrix, simMatrix, differenceMatrix, normalisationFactor
+    distanceMatrix = pd.DataFrame(np.clip(distanceMatrix,0,1))
+    distanceMatrix.index = keptX.index
+    distanceMatrix.columns = keptX.index
+
+    jointMatrix = pd.DataFrame( (1-simMatrix)*0.5 + distanceMatrix*0.5 )
+#    jointMatrix.index = keptX.index
+    #jointMatrix.columns = keptX.index
+
+
+    return keptX, jointMatrix, simMatrix, distanceMatrix, normalisationFactor
