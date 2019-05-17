@@ -42,7 +42,7 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
             prev = (sum(selectedCells), sum(selectedColumns))
         selectedCells = (keptX>=0).sum(axis=1) >= minMeasurementsPerCell # Select only cells/rows with at least one measurement
         selectedColumns = ((keptX[selectedCells]==1).sum(axis=0)>=minPresence) & ((keptX[selectedCells]==0).sum(axis=0)>0)
-        print( f'We have {sum(selectedCells)} rows and {sum(selectedColumns)} X left' )
+        #print( f'We have {sum(selectedCells)} rows and {sum(selectedColumns)} X left' )
         keptX = keptX[selectedCells].loc[:,selectedColumns]
 
     if keptX.shape[0]<2:
@@ -50,20 +50,20 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
 
     pOnes = []
     pZeros = []
-    for sSNV in keptX.columns:
+    for feature in keptX.columns:
         # Weights:
-        column = keptX[sSNV]
+        column = keptX[feature]
         if weight:
-            pOnes.append( -np.log2( ( np.sum(column==1)/len(column) )**2 ) ) #probability of two cells both having sSNV
-            pZeros.append( -np.log2( ( np.sum(column==0)/len(column) )**2 ) )#probability of two cells not having sSNV,  (and we know it)
+            pOnes.append( -np.log2( ( np.sum(column==1)/len(column) )**2 ) ) #probability of two cells both having feature
+            pZeros.append( -np.log2( ( np.sum(column==0)/len(column) )**2 ) )#probability of two cells not having feature,  (and we know it)
         else:
-            pOnes.append( -np.log2( ( 0.5 )**2 ) ) #probability of two cells both having sSNV
+            pOnes.append( -np.log2( ( 0.5 )**2 ) ) #probability of two cells both having feature
             pZeros.append( -np.log2( (0.5)**2 ))
 
     pOnes = np.array(pOnes)
     pZeros = np.array(pZeros)
-    print( np.sum(np.isnan(pZeros)), np.sum(np.isnan(pOnes)),  np.min(pZeros), np.min(pOnes))
-    print(keptX.shape)
+    #print( np.sum(np.isnan(pZeros)), np.sum(np.isnan(pOnes)),  np.min(pZeros), np.min(pOnes))
+    #print(keptX.shape)
     rawMatrix = keptX.values
 
     #return rawMatrix
