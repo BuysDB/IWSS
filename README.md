@@ -14,6 +14,7 @@ pip3 install https://github.com/BuysDB/SparseBinaryDistance/archive/master.zip
 
 ### Usage
 
-```
 
-```
+Examples
+See:
+https://github.com/BuysDB/SparseBinaryDistance/blob/master/notebooks/Sparse%20binary%20distance%20examples.ipynb
