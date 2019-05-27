@@ -11,7 +11,8 @@ The prerequisites are Python 3.6 or higher, pandas and numpy
 
 ### Installation
 ```
-pip3 install https://github.com/BuysDB/SparseBinaryDistance/archive/master.zip
+git clone https://github.com/BuysDB/SparseBinaryDistance
+pip3 install -e ./SparseBinaryDistance
 ```
 
 ### Usage
