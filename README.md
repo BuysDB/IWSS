@@ -1,7 +1,7 @@
 # Information Weighted Sparse Sample Distance
 
 Information Weighted Sparse Sample  (IWSS) distance is able to calculate distances between samples which are encoded by binary features with missing data.
-IWSS has been written by Juan Manuel Pedraza Leal and Buys de Barbanson
+IWSS has been designed by Juan Manuel Pedraza Leal and implemented by Buys de Barbanson
 
 <img alt="Sparse distance" src="http://buysdb.nl/images/ext/sparseDist.png">
 
