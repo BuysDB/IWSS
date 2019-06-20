@@ -1,7 +1,7 @@
-# Sparse Binary Distance
+# Information Weighted Sparse Sample Distance
 
-Sparse Binary Distance is able to calculate distances between samples which are encoded by binary features with missing data.
-Sparse Binary Distance has been written by Juan Manuel Pedraza Leal and Buys de Barbanson
+Information Weighted Sparse Sample  (IWSS) distance is able to calculate distances between samples which are encoded by binary features with missing data.
+IWSS has been written by Juan Manuel Pedraza Leal and Buys de Barbanson
 
 <img alt="Sparse distance" src="http://buysdb.nl/images/ext/sparseDist.png">
 
