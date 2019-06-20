@@ -11,9 +11,9 @@ The prerequisites are Python 3.6 or higher, pandas and numpy
 
 ### Installation
 ```
-git clone https://github.com/BuysDB/SparseBinaryDistance
-pip3 install -e ./SparseBinaryDistance
+git clone https://github.com/BuysDB/IWSS
+pip3 install -e ./IWSS
 ```
 
 ### Usage
-[Example notebook](https://github.com/BuysDB/SparseBinaryDistance/blob/master/notebooks/Sparse%20binary%20distance%20examples.ipynb)
+[Example notebook](https://github.com/BuysDB/IWSS/blob/master/notebooks/Sparse%20binary%20distance%20examples.ipynb)
