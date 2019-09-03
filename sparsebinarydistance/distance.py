@@ -41,7 +41,7 @@ def sparseDistance( X, minPresence=1, minMeasurementsPerCell=1, weight=True ):
         if selectedCells is not None:
             prev = (sum(selectedCells), sum(selectedColumns))
         selectedCells = (keptX>=0).sum(axis=1) >= minMeasurementsPerCell # Select only cells/rows with at least one measurement
-        selectedColumns = ((keptX[selectedCells]>=0).sum(axis=0)>=minPresence)
+        selectedColumns = ((keptX[selectedCells]==1).sum(axis=0)>=minPresence) & ((keptX[selectedCells]==0).sum(axis=0)>0)
         #print( f'We have {sum(selectedCells)} rows and {sum(selectedColumns)} X left' )
         keptX = keptX[selectedCells].loc[:,selectedColumns]
 
