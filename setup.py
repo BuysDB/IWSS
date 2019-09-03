@@ -6,6 +6,6 @@ setup(
 	author_email='code@buysdb.nl',
 	description='Calculate a distance matrix based on a binary feature matrix with missing data ',
 	url='https://github.com/BuysDB/SparseBinaryDistance',
-	py_modules=['sparsebinarydistance'],
+	packages=['sparsebinarydistance'],
 	install_requires=['pandas','numpy']
 )
